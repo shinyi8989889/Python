@@ -1,0 +1,25 @@
+  1 #! /usr/bin/python
+  2 #coding=utf-8
+  3 
+  4 answer=1234
+  5 A=B=0
+  6 
+  7 while True:
+  8     number=raw_input("請猜一個四位數字: ")
+  9     for i in range(4):            #i=0,1,2,3
+ 10         if str(answer)[i]==number[i]:
+ 11             A+=1
+ 12 
+ 13     for j in range(4):
+ 14         for k in range(4):
+ 15             if str(answer)[j]!=number[j]:
+ 16                 if number[k]==str(answer)[j]:
+ 17                     B+=1
+ 18                     break
+ 19 
+ 20     if number==str(answer):
+ 21         print("Bingo!")
+ 22         break
+ 23     else:
+ 24         print("%dA%dB")%(A,B)
+ 25         A=B=0 
