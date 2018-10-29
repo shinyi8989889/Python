@@ -1,0 +1,15 @@
+  1 #! /usr/bin/python                                                          
+  2 #coding=utf-8
+  3 
+  4 number=raw_input("請輸入兩個數字: ")
+  5 number=number.split()  #分割字串,中間有空白就會分割成陣列行式
+  6 #print(number)         #['34', '51']陣列[0]和[1]
+  7 
+  8 a=int(number[0])
+  9 b=int(number[1])
+ 10 while(a%b)!=0:      #a=34,b=51->a=51,b=34->a=34,b=17->公因數=17   
+ 11     b,a=a%b,b
+ 12 print("最大公因數為 "+str(b))
+ 13 
+ 14 
+ 15 #print("%d和%d最大公因數為 "+str(b))%(a,b)
