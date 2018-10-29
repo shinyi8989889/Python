@@ -1,0 +1,54 @@
+  1 #!/usr/bin/python                                                                                                           
+  2 #coding=utf-8
+  3 
+  4 import time
+  5 import RPi.GPIO as GPIO
+  6 
+  7 GPIO.setwarnings(False)
+  8 LED_G,LED_R=12,32
+  9 GPIO.setmode(GPIO.BOARD)
+ 10 GPIO.setup(LED_G,GPIO.OUT)
+ 11 GPIO.setup(LED_R,GPIO.OUT)
+ 12 
+ 13 pwm_G=GPIO.PWM(LED_G,50)
+ 14 pwm_R=GPIO.PWM(LED_R,50)
+ 15 #50->1/50=0.02
+ 16 
+ 17 light_g,light_r=50,50
+ 18 pwm_G.start(light_g) #1~100
+ 19 pwm_R.start(light_r)
+ 20 
+ 21 try:
+ 22     while True:
+ 23         while True:
+ 24             light_g=raw_input("請輸入0~100以控制LED的綠燈: ")
+ 25             if light_g.isdigit():
+ 26                 light_g=int(light_g)
+ 27                 if(light_g>100)|(light_g<0):
+ 28                     print "請輸入0~100的數字好嗎! "
+ 29                     continue
+ 30             else:
+ 31                 print "不要搞怪請輸入0~100的數字: "
+ 32                 continue
+ 33             pwm_G.ChangeDutyCycle(light_g)
+ 34             print "LED綠燈現在的亮度是 %d %%"%(light_g)
+ 35             break
+ 36         while True:
+ 37             light_r=raw_input("請輸入0~100以控制LED的紅燈: ")
+ 38             if light_r.isdigit():
+ 39                 light_r=int(light_r)
+ 40                 if(light_r>100)|(light_r<0):
+ 41                     print "講不聽欸!我說輸入0~100的數字! "
+ 42                     continue
+ 43             else:
+ 44                 print "請輸入一個數字: "
+ 45                 continue
+ 46             pwm_R.ChangeDutyCycle(light_r)
+ 47             print "LED紅燈現在的亮度是 %d %%"%(light_r)
+ 48             break
+ 49 except KeyboardInterrupt:
+ 50     pwm_G.stop()
+ 51     pwm_R.stop()
+ 52     GPIO.cleanup()
+ 
+ 
