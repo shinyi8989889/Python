@@ -1,0 +1,31 @@
+  1 #! /usr/bin/python                                                                                                          
+  2 #coding=utf-8
+  3 
+  4 import time
+  5 import RPi.GPIO as GPIO
+  6 
+  7 GPIO.setwarnings(False)
+  8 LED_G,LED_R=12,32
+  9 GPIO.setmode(GPIO.BOARD)
+ 10 GPIO.setup(LED_G,GPIO.OUT)
+ 11 GPIO.setup(LED_R,GPIO.OUT)
+ 12 
+ 13 try:
+ 14     for i in range(0,10):
+ 15         print "LED_G is on"
+ 16         GPIO.output(LED_G,GPIO.HIGH)
+ 17         time.sleep(0.5)
+ 18         print "LED_G is off"
+ 19         GPIO.output(LED_G,GPIO.LOW)
+ 20         time.sleep(0.5)
+ 21 
+ 22     for i in range(0,10):
+ 23         print "LED_R is on"
+ 24         GPIO.output(LED_R,GPIO.HIGH)
+ 25         time.sleep(0.5)
+ 26         print "LED_R is off"
+ 27         GPIO.output(LED_R,GPIO.LOW)
+ 28         time.sleep(0.5)
+ 29 
+ 30 except KeyboardInterrupt:
+ 31     GPIO.cleanup()
